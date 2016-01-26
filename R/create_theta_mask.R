@@ -17,7 +17,7 @@ create_theta_mask <- function(template_raster, optical_center, projection_functi
     warning('The template seems to be a geo-raster. Results may be wrong!')
   
   # raster that hold values which represent distance to optical_center (distance in pixel)
-  dist2centre <- distanceFromPoints(template_raster, matrix(optical_center, ncol = 2))
+  dist2centre <- distanceFromPoints(subset(template_raster, 1), matrix(optical_center, ncol = 2))
   
   # theta [degree]
   theta <- calc(dist2centre, projection_function)

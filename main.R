@@ -19,7 +19,13 @@ library(ggplot2)
 rm(list=ls())
 
 
-template <- raster('DSC_template.tif')
+template <- brick('DSC_template.tif')
+
+# b <- brick('DSC_template.tif')
+# idx <- sample(1:ncell(b), 1000)
+# blue <- values(b[[3]])[idx]
+# green <- values(b[[2]])[idx]
+# red <- values(b[[1]])[idx]
 
 # c(col, row)
 optical_center <- c(2452, 1496)
@@ -43,7 +49,7 @@ mask <- create_theta_mask(template, optical_center, proj_function, c(50, 60))
 tifs <- list.files(path = 'tifs/', pattern = 'DSC_[0-9]{4}.tif$', full.names = TRUE, recursive = TRUE)
 
 
-sfInit(TRUE, 4)
+sfInit(TRUE, 3)
 # sfExport(list = c('derive_PAI', 'Pgap2PAI', 'mask'))
 sfExportAll()
 sfLibrary(raster)
